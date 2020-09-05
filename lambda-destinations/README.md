@@ -6,6 +6,8 @@ Loosely based on https://aws.amazon.com/blogs/compute/introducing-aws-lambda-des
 * ErrorHandler function invoked on failures, does nothing but log events
 * SNS topic receiving notifications for successful Lambda invocations
 
+## Usage
+
 Apply the stack. To receive SNS notifications, subscribe to the topic by email.
 
 ## Examples
