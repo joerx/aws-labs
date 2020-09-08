@@ -126,7 +126,7 @@ def map_tx(item):
     }
 
 
-def expenses_between(tableName, userId, start, end):
+def transactions_between(tableName, userId, start, end):
     tstart = int(start.timestamp() * 1000)
     tend = int(end.timestamp() * 1000)
 
@@ -159,7 +159,7 @@ else:
     create_table(tableName)
     insert_data(tableName)
 
-# Johns expenses the day before yesterday
+# Johns transactions the day before yesterday
 start = datetime.now() - timedelta(days=2)
 end = datetime.now() - timedelta(days=1)
-print(expenses_between(tableName, 'john@example.org', start, end))
+print(transactions_between(tableName, 'john@example.org', start, end))
