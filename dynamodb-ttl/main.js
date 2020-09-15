@@ -8,7 +8,11 @@ const awsOptions = {
 
 const dynamoDB = new AWS.DynamoDB(awsOptions);
 
-const milliseconds = 60 * 1000;
+const seconds = 60;
+
+const milliseconds = seconds * 1000;
+
+// const milliseconds = 60 * 1000;
 
 const ttlMinutes = 60;
 
@@ -67,15 +71,17 @@ async function createTableIfNotExist(tableName) {
 }
 
 async function insertData(tableName, numRecords) {
+  console.log(`Inserting ${numRecords} example records`);
+
   await Promise.all(
-    [...Array(10).keys()].map((i) =>
+    [...Array(numRecords).keys()].map((i) =>
       dynamoDB
         .putItem({
           TableName: tableName,
           Item: {
             UserName: { S: random_name() },
             SessionId: { S: uuidv4() },
-            ExpirationDate: { N: `${Date.now() + ttlMinutes * milliseconds}` },
+            ExpirationDate: { N: `${Math.floor(Date.now() / 1000) + ttlMinutes * seconds}` },
           },
         })
         .promise()
